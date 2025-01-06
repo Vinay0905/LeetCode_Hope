@@ -1,0 +1,11 @@
+class Solution {
+public:
+    void rotate(vector<int>& n, int k) {
+        int n1=n.size();
+        k=k%n1;
+        reverse(n.begin(), n.end());
+        reverse(n.begin(), n.begin() + k);
+        reverse(n.begin() + k, n.end());
+
+    }
+};
