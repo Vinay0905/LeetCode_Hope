@@ -1,0 +1,16 @@
+class Solution {
+public:
+    string removeDuplicates(string s) {
+        string c; 
+        for (char ch : s) {
+            if (!c.empty() && c.back() == ch) {
+                
+                c.pop_back();
+            } else {
+                
+                c.push_back(ch);
+            }
+        }
+        return c; 
+    }
+};
