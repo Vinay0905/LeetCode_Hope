@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int distinctAverages(vector<int>& nums) {
+    unordered_set<double> averages;
+    sort(nums.begin(),nums.end());
+    int i=0,j=nums.size()-1;
+    while(i<j){
+        double avg= (nums[i]+nums[j])/2.0;
+        averages.insert(avg);
+        i++;
+        j--;
+    }
+    return averages.size();
+    }
+    };
+
