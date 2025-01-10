@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int bagOfTokensScore(vector<int>& tokens, int power) {
+        sort(tokens.begin(),tokens.end());
+        int a=0,b=tokens.size()-1;
+        int s=0;
+        while (a<=b){
+            if(power>=tokens[a]){
+                power-=tokens[a];
+                a++;
+                s++;
+            }
+            else{
+                if(power+tokens[b]>=tokens[a] && s!=0 && b!=a){
+                    power+=tokens[b];
+                    b--;
+                    s--;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        return s;
+    }
+};
