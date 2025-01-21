@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        
+        int first = find(nums, target, true);
+        int last = find(nums, target, false);
+
+        return {first, last};
+    }
+
+private:
+    int find(vector<int>& nums, int target, bool findFirst) {
+            int l = 0, h = nums.size() - 1;
+            int position = -1;
+
+            while (l <= h) {
+                int mid = l + (h - l) / 2;
+
+                if (nums[mid] == target) {
+                    position = mid;
+                    if (findFirst) {
+                        h = mid - 1; 
+                    } else {
+                        l = mid + 1; 
+                    }
+                } else if (nums[mid] < target) {
+                    l = mid + 1; 
+                } else {
+                    h = mid - 1; 
+                }
+            }
+
+            return position;
+        }
+
+};
