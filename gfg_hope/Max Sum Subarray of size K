@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    int maximumSumSubarray(vector<int>& arr, int k) {
+        // code here
+        int s=0,i=0,j=0;
+        
+        int a=INT_MIN;
+        while(j<arr.size()){
+            s=s+arr[j];
+            if((j-i+1) == k){
+                a=max(a,s);
+                s=s-arr[i];
+                i++;
+            }
+            j++;
+        }
+        return a;
+    }
+};
