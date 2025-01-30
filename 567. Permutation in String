@@ -1,0 +1,34 @@
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        vector<int> p(26, 0); 
+        vector<int> s(26, 0); 
+        int a = s1.size();   
+        int b = s2.size();    
+
+        if (b < a) {
+            return false;
+        }
+
+        for (int i = 0; i < a; i++) {
+            p[s1[i] - 'a']++; 
+            s[s2[i] - 'a']++; 
+        }
+
+        if (p == s) {
+            return true;
+        }
+
+        for (int j = a; j < b; j++) {
+            s[s2[j] - 'a']++;
+
+            s[s2[j - a] - 'a']--;
+
+            if (p == s) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+};
