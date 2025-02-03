@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int maxArea(vector<int>& h) {
+    int n = h.size();
+    int max_wat = 0;
+    int left = 0;
+    int rig = n - 1;
+
+    while (left < rig) {
+        int currh = min(h[left], h[rig]);
+        int currwid = rig - left; 
+        int currwat = currh * currwid;
+        max_wat = max(max_wat, currwat);
+
+        if (h[left] < h[rig]) {
+            left++;
+        } else {
+            rig--; 
+        }
+    }
+    return max_wat;
+}
+};
