@@ -1,0 +1,59 @@
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+    int m = grid.size();
+    int n = grid[0].size();
+
+    queue<pair<int, int>> rot; 
+    int freshOranges = 0;
+
+    
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (grid[i][j] == 2) {
+                rot.push({i, j});
+            } else if (grid[i][j] == 1) {
+                freshOranges++;
+            }
+        }
+    }
+    if (freshOranges == 0) {
+        return 0; 
+    }
+    int day = 0;
+    int dx[] = {0, 0, 1, -1};
+    int dy[] = {1, -1, 0, 0};
+    while (!rot.empty()) {
+        int size = rot.size(); 
+        bool newRot = false;      
+
+        for (int k = 0; k < size; ++k) {
+            int x = rot.front().first;
+            int y = rot.front().second;
+            rot.pop();
+
+            for (int i = 0; i < 4; ++i) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+
+                if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] == 1) {
+                    grid[nx][ny] = 2; 
+                    rot.push({nx, ny});
+                    freshOranges--;
+                    newRot = true;
+                }
+            }
+        }
+        if (newRot) {
+            day++;
+        }
+
+        if (freshOranges == 0) {
+            return day;
+        }
+        
+    }
+
+    return -1; 
+    }
+};
