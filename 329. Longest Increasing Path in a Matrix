@@ -1,0 +1,51 @@
+class Solution {
+public:
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        if (matrix.empty() || matrix[0].empty()) {
+            return 0;
+        }
+
+        int rows = matrix.size();
+        int cols = matrix[0].size();
+        int max_path = 0;
+
+        
+        vector<vector<int>> dp(rows, vector<int>(cols, 0));
+
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                max_path = max(max_path, dfs(matrix, i, j, dp));
+            }
+        }
+
+        return max_path;
+    }
+   
+private:
+    int dfs(vector<vector<int>>& matrix, int row, int col, vector<vector<int>>& dp) {
+        int rows = matrix.size();
+        int cols = matrix[0].size();
+
+        
+        if (dp[row][col] != 0) {
+            return dp[row][col];
+        }
+
+        int max_len = 1; 
+        int dx[] = {0, 0, 1, -1};
+        int dy[] = {1, -1, 0, 0};
+
+        for (int i = 0; i < 4; ++i) {
+            int nextrow = row + dx[i];
+            int nextcol = col + dy[i];
+
+            if (nextrow >= 0 && nextrow < rows && nextcol >= 0 && nextcol < cols && matrix[nextrow][nextcol] > matrix[row][col]) {
+                max_len = max(max_len, 1 + dfs(matrix, nextrow, nextcol, dp));
+            }
+        }
+
+        
+        dp[row][col] = max_len;
+        return max_len;
+    }
+};
