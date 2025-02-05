@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int land = 0;
+        int row = grid.size();
+        if (row == 0) return 0;
+        int col = grid[0].size();
+
+        set<string> visited; 
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == '1' && visited.find(to_string(i) + "," + to_string(j)) == visited.end()) {
+                    dfs(i, j, grid, row, col, visited); 
+                    land++;
+                }
+            }
+        }
+        return land;
+    }
+
+private:
+    void dfs(int r, int c, vector<vector<char>>& grid, int row, int col, set<string>& visited) {
+        if (r < 0 || r >= row || c < 0 || c >= col || grid[r][c] == '0' || visited.find(to_string(r) + "," + to_string(c)) != visited.end()) {
+            return; 
+        }
+
+        visited.insert(to_string(r) + "," + to_string(c)); 
+        grid[r][c] = '0'; 
+
+        int dx[] = {0, 0, 1, -1};
+        int dy[] = {1, -1, 0, 0};
+
+        for (int i = 0; i < 4; i++) {
+            int adjR = r + dx[i];
+            int adjC = c + dy[i];
+            dfs(adjR, adjC, grid, row, col, visited); 
+        }
+    }
+};
