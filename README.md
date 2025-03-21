@@ -2,6 +2,8 @@
 
 Welcome to **LeetCode_Hope**! This repository is dedicated to providing solutions to various LeetCode problems. Whether you're preparing for coding interviews, enhancing your problem-solving skills, or exploring different algorithms, this repository serves as a valuable resource.
 
+![Git](https://img.shields.io/badge/Git-Interactive-red?logo=git) ![Python](https://img.shields.io/badge/Python-Interactive-blue?logo=python)
+
 ## About This Repository
 
 This project contains solutions to a wide range of LeetCode problems, implemented in multiple programming languages. The goal is to help developers and coding enthusiasts improve their skills and prepare for technical interviews.
