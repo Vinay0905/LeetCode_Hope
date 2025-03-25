@@ -1,0 +1,40 @@
+class Solution {
+public:
+        vector<string> buildArray(vector<int>& target, int n) {
+            vector<string> result;
+            int k = 0;
+            for (int i = 1; i <= n; i++) {
+                if (k == target.size()) break;  
+                if (target[k] == i) {
+                    result.push_back("Push");
+                    k++;
+                } else {
+                    result.push_back("Push");
+                    result.push_back("Pop");
+                }
+            }
+        return result;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
