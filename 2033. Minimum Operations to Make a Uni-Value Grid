@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int minOperations(vector<vector<int>>& grid, int x) {
+        vector<int> arr;
+        for(vector<int> v: grid)
+            for(int i: v)
+                arr.push_back(i);
+        sort(arr.begin(), arr.end());
+        int n = arr.size();
+        int med = arr[n/2], operations = 0, diff;
+        for(int i: arr){
+            diff = abs(med - i);
+            if(diff%x)
+                return -1;
+            operations += diff/x;
+        }
+        return operations;
+    }
+};
