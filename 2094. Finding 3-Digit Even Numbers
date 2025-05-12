@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> findEvenNumbers(vector<int> & digits) {
+        set<int> even_numbers;
+        map<int, ptrdiff_t> digits_and_counts;
+
+        for (vector<int>::const_reference digit : digits)
+            digits_and_counts[digit]++;
+
+        combine(0, even_numbers, digits_and_counts);
+        return vector<int>(even_numbers.begin(), even_numbers.end());
+    }
+
+    void combine(int sum, set<int> & even_numbers, map<int, ptrdiff_t> & digits_and_counts) {
+        if (1000 <= sum) return;
+        if (100  <= sum && sum <= 999 && sum % 2 == 0) {
+            even_numbers.insert(sum);
+            return;
+        }
+
+        for (auto & [digit, count] : digits_and_counts) {
+            if (--count >= 0)
+                combine(sum * 10 +  digit, even_numbers, digits_and_counts);
+                ++count;
+        }
+    }
+};
