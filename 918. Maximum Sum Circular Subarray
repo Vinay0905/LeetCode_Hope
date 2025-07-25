@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int kadane(vector<int>& nums)
+    {
+        int maxsum=nums[0],currsum=nums[0];
+        for(int i=1;i<nums.size();i++){
+            currsum=max(nums[i],currsum+nums[i]);
+            maxsum=max(maxsum,currsum);
+        }
+        return maxsum;
+    }
+    int maxSubarraySumCircular(vector<int>& nums) {
+        int total=0,maxSum=nums[0],minSum=nums[0],currMax=0,currMin=0;
+        for (int n : nums) {
+        currMax = max(n, currMax + n);
+        maxSum = max(maxSum, currMax);
+        
+        currMin = min(n, currMin + n);
+        minSum = min(minSum, currMin);
+        
+        total += n;
+    }
+    if (maxSum < 0) return maxSum; 
+    return max(maxSum, total - minSum);
+
+
+    }
+};
