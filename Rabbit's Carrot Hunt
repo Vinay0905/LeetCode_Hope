@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+public class Hello {
+    // Directions: right, left, top, top-right, bottom-right
+    static int[] dx = {0, 0, -1, -1, 1};
+    static int[] dy = {1, -1, 0, 1, 1};
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Read grid dimensions
+        int R = sc.nextInt();
+        int C = sc.nextInt();
+        sc.nextLine(); // consume newline
+
+        // Read grid
+        char[][] grid = new char[R][C];
+        for (int i = 0; i < R; i++) {
+            String row = sc.nextLine().replaceAll("\\s+", "");
+            for (int j = 0; j < C; j++) {
+                grid[i][j] = row.charAt(j);
+            }
+        }
+
+        // We are searching for "CARROT"
+        String word = "CARROT";
+        boolean found = false;
+
+        // Try starting from every cell
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                boolean[][] visited = new boolean[R][C];
+                if (dfs(grid, i, j, word, 0, visited)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) break;
+        }
+
+        System.out.println(found ? "yes" : "no");
+        sc.close();
+    }
+
+    // DFS to check if we can form the word starting from (x, y)
+    static boolean dfs(char[][] grid, int x, int y, String word, int index, boolean[][] visited) {
+        // If we've matched all characters
+        if (index == word.length()) return true;
+
+        // Check bounds, visited, and character match
+        if (x < 0 || y < 0 || x >= grid.length || y >= grid[0].length || visited[x][y] || grid[x][y] != word.charAt(index)) {
+            return false;
+        }
+
+        // Mark current cell as visited
+        visited[x][y] = true;
+
+        // Explore all 5 allowed directions
+        for (int dir = 0; dir < 5; dir++) {
+            int nx = x + dx[dir];
+            int ny = y + dy[dir];
+            if (dfs(grid, nx, ny, word, index + 1, visited)) {
+                return true;
+            }
+        }
+
+        // Backtrack: unmark the cell
+        visited[x][y] = false;
+
+        return false;
+    }
+}
