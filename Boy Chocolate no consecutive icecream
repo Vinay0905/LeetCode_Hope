@@ -1,0 +1,18 @@
+import java.util.*;
+  public class Hello {
+    public static void main(String[] args) {
+      Scanner sc=new Scanner(System.in);
+      int n=sc.nextInt();
+      long[] dpC=new long[n+1];
+      long[] dpI=new long[n+1];
+      dpC[0]=1;
+      dpI[0]=1;
+      for(int i = 2; i < n ;i++)
+          dpC[i]=dpc[i-1]+dpI[i-1];
+          dp[i]=dpc[i-1];
+      }
+      long totalways=dpC[n]+dpI[n];
+      System.out.print(totalways);
+      sc.close();
+  }
+}
