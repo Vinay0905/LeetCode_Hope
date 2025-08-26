@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class ChocolateIceCream {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // Read number of days
+        int N = sc.nextInt();
+        
+        // dp[i] = number of ways to eat in i days
+        // We'll use an array of size N+1 (for days 0 to N)
+        long[] dp = new long[N + 1];
+        
+        // Base case: 0 days → 1 way (do nothing)
+        dp[0] = 1;
+        
+        // Fill dp for day 1 to N
+        for (int day = 1; day <= N; day++) {
+            if (day % 3 == 0) {
+                // On day divisible by 3 → 2 choices
+                dp[day] = dp[day - 1] * 2;
+            } else {
+                // Only 1 choice (chocolate)
+                dp[day] = dp[day - 1];
+            }
+        }
+        
+        // Answer is dp[N] → number of ways for N days
+        System.out.println(dp[N]);
+        
+        sc.close();
+    }
+}
