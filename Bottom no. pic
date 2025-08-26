@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+public class MaxGridSum {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Read R and C
+        int R = sc.nextInt();
+        int C = sc.nextInt();
+
+        // Read grid
+        int[][] grid = new int[R][C];
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                grid[i][j] = sc.nextInt();
+            }
+        }
+
+        // dp[i][j] = max sum up to row i, ending at column j
+        int[][] dp = new int[R][C];
+
+        // Base: first row
+        for (int j = 0; j < C; j++) {
+            dp[0][j] = grid[0][j];
+        }
+
+        // Fill dp for row 1 to R-1
+        for (int i = 1; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                // Find the best sum from previous row, but NOT from column j
+                int maxPrev = Integer.MIN_VALUE;
+                for (int k = 0; k < C; k++) {
+                    if (k != j) {  // can't pick same column
+                        if (dp[i-1][k] > maxPrev) {
+                            maxPrev = dp[i-1][k];
+                        }
+                    }
+                }
+                // Add current cell value
+                dp[i][j] = grid[i][j] + maxPrev;
+            }
+        }
+
+        // Answer: maximum value in the last row
+        int result = Integer.MIN_VALUE;
+        for (int j = 0; j < C; j++) {
+            if (dp[R-1][j] > result) {
+                result = dp[R-1][j];
+            }
+        }
+
+        System.out.println(result);
+
+        sc.close();
+    }
+}
