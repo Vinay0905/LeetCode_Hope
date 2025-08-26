@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class Hello {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Read R and C
+        int r = sc.nextInt();
+        int c = sc.nextInt();
+
+        // Read grid
+        int[][] grid = new int[r][c];
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                grid[i][j] = sc.nextInt();
+            }
+        }
+
+        // DP table: dp[i][j] = max sum ending at row i, column j
+        int[][] dp = new int[r][c];
+
+        // Step 1: Initialize first column
+        for (int i = 0; i < r; i++) {
+            dp[i][0] = grid[i][0];
+        }
+
+        // Step 2: Fill for columns 1 to c-1
+        for (int j = 1; j < c; j++) {  // for each column
+            for (int i = 0; i < r; i++) {  // for each row in this column
+                // Find best from previous column, but NOT from same row
+                int maxPrev = Integer.MIN_VALUE;
+                for (int k = 0; k < r; k++) {
+                    if (k != i) {  
+                        if (dp[k][j-1] > maxPrev) {
+                            maxPrev = dp[k][j-1];
+                        }
+                    }
+                }
+                dp[i][j] = grid[i][j] + maxPrev;
+            }
+        }
+
+        // Step 3: Find max in last column
+        int result = Integer.MIN_VALUE;
+        for (int i = 0; i < r; i++) {
+            if (dp[i][c-1] > result) {
+                result = dp[i][c-1];
+            }
+        }
+
+        System.out.println(result);
+
+        sc.close();
+    }
+}
