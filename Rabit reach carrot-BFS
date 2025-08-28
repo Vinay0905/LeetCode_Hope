@@ -13,9 +13,8 @@ public class Min_BFS {
         char[][] grid = new char[N][M];
         // Read grid
         for (int i = 0; i < N; i++) {
-            String row = sc.nextLine();
                 for (int j = 0; j < M; j++) {
-                grid[i][j] = row.charAt(j);
+                grid[i][j] = sc.next().charAt(0);
             }
         }
         // char[][] grid= new char[N][M];
