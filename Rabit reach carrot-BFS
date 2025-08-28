@@ -1,0 +1,107 @@
+import java.util.*;
+
+public class Min_BFS {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // sc.nextLine(); // consume the newline after M
+
+        // char[][] grid = new char[N][M];
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        char[][] grid = new char[N][M];
+        // Read grid
+        for (int i = 0; i < N; i++) {
+            String row = sc.nextLine();
+                for (int j = 0; j < M; j++) {
+                grid[i][j] = row.charAt(j);
+            }
+        }
+        // char[][] grid= new char[N][M];
+        // char[][] grid = {
+        //         { '0', '0', '0' },
+        //         { 'R', '0', '0' },
+        //         { '0', '0', 'C' }
+        // };
+
+        // int N = grid.length;
+        // int M = grid[0].length;
+        // Find start (R) and end (C)
+        int startRow = -1, startCol = -1;
+        int endRow = -1, endCol = -1;
+
+        // This part of the code snippet is iterating over the 2D grid represented by
+        // the `grid` array
+        // to find the positions of the rabbit ('R') and the carrot ('C'). Here's a
+        // breakdown of what it
+        // does:
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                if (grid[i][j] == 'R') {
+                    startRow = i;
+                    startCol = j;
+                } else if (grid[i][j] == 'C') {
+                    endRow = i;
+                    endCol = j;
+                }
+            }
+        }
+
+        // This part of the code is setting up the directions for movement in the grid
+        // and initializing
+        // the necessary data structures for the breadth-first search (BFS) traversal.
+        // Directions: right, down, left, up
+        int[] dx = { 0, 1, 0, -1 };
+        int[] dy = { 1, 0, -1, 0 };
+
+        boolean[][] visited = new boolean[N][M];
+        Queue<int[]> queue = new LinkedList<>(); // each int[] = {row, col, distance}
+
+        visited[startRow][startCol] = true;
+        queue.add(new int[] { startRow, startCol, 0 });
+
+        int minSteps = -1;
+
+        // This part of the code is responsible for performing a breadth-first search
+        // (BFS) traversal
+        // on the grid to find the shortest path from the starting position of the
+        // rabbit ('R') to the
+        // carrot ('C'). Here's a breakdown of what it does:
+        while (!queue.isEmpty()) {
+            int[] current = queue.poll();
+            int row = current[0];
+            int col = current[1];
+            int dist = current[2];
+
+            if (row == endRow && col == endCol) {
+                minSteps = dist;
+                break;
+            }
+
+            // Explore neighbors
+            // This part of the code is responsible for exploring the neighboring cells of
+            // the current
+            // cell in the grid.
+
+            for (int i = 0; i < 4; i++) {
+                int newRow = row + dx[i];
+                int newCol = col + dy[i];
+
+                if (newRow >= 0 && newRow < N && newCol >= 0 && newCol < M
+                        && !visited[newRow][newCol]) {
+                    visited[newRow][newCol] = true;
+                    queue.add(new int[] { newRow, newCol, dist + 1 });
+                }
+            }
+        }
+
+        if (minSteps != -1) {
+            System.out.println("The Rabit can reach the Carrot in " + minSteps + " steps.");
+        } else {
+            System.out.println(-1);
+        }
+
+        sc.close();
+    }
+}
