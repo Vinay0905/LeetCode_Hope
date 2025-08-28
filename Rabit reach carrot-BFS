@@ -88,8 +88,8 @@ public class Min_BFS {
                 int newRow = row + dx[i];
                 int newCol = col + dy[i];
 
-                if (newRow >= 0 && newRow < N && newCol >= 0 && newCol < M
-                        && !visited[newRow][newCol]) {
+                if (newRow >= 0 && newRow < N && newCol >= 0 && newCol < M && !visited[newRow][newCol && grid[nr][nc]!='1')
+                {
                     visited[newRow][newCol] = true;
                     queue.add(new int[] { newRow, newCol, dist + 1 });
                 }
