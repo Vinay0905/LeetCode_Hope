@@ -1,0 +1,32 @@
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Read N and M
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+
+        // Read N numbers into an array
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        // Sort the array → smallest first
+        Arrays.sort(arr);
+
+        // Add the first M numbers
+        int sum = 0;
+        for (int i = 0; i < M; i++) {
+            sum += arr[i];
+        }
+
+        // Print the answer
+        System.out.println(sum);
+
+        sc.close();
+    }
+}
