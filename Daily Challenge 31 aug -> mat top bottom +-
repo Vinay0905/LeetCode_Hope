@@ -1,0 +1,52 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int R = sc.nextInt();
+        int C = sc.nextInt();
+        sc.nextLine();
+        
+        String[][] mat = new String[R][C];
+        
+        for (int i = 0; i < R; i++) {
+            String[] row = sc.nextLine().trim().split("\\s+");
+            for (int j = 0; j < C; j++) {
+                mat[i][j] = row[j];
+            }
+        }
+        
+        int[][] res = new int[R][C];
+        
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                String s = mat[i][j];
+                if (s.equals("+")) {
+                    int top = Integer.parseInt(mat[i-1][j]);
+                    int bottom = Integer.parseInt(mat[i+1][j]);
+                    res[i][j] = top + bottom;
+                } 
+                else if (s.equals("-")) {
+                    int top = Integer.parseInt(mat[i-1][j]);
+                    int bottom = Integer.parseInt(mat[i+1][j]);
+                    res[i][j] = Math.abs(top - bottom);
+                } 
+                else {
+                    res[i][j] = Integer.parseInt(s);
+                }
+            }
+        }
+        
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                System.out.print(res[i][j]);
+                if (j < C - 1) 
+                    System.out.print(" ");
+            }
+            System.out.println();
+        }
+        
+        sc.close();
+    }
+}
