@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Read number of integers
+        int N = scanner.nextInt();
+
+        long sum = 0; // Use long to avoid overflow
+
+        // Process each number
+        for (int i = 0; i < N; i++) {
+            int x = scanner.nextInt();
+            int powerOfTwo = findLastOnePower(x);
+            sum += powerOfTwo;
+        }
+
+        System.out.println(sum);
+        scanner.close();
+    }
+
+    // This method finds the value of the last (rightmost) 1 in binary
+    public static int findLastOnePower(int num) {
+        int position = 1; // Start from 2^0 = 1
+
+        while (num > 0) {
+            if (num % 2 == 1) {
+                return position;
+            }
+            num = num / 2;
+            position = position * 2;
+        }
+
+        return 0;
+    }
+}
