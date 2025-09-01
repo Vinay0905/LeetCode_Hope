@@ -36,7 +36,6 @@ Sample Output 1
 
 1
 
-
 import java.io.*;
 import java.util.*;
 
@@ -64,29 +63,20 @@ public class Solution {
         
         Arrays.sort(arrival);
         Arrays.sort(depart);
-        
         int i=1,j=0;
         int count=1,pf=1;
         
-        
-        while (i < n && j < n) {
-            if (arrival[i] < depart[j]) {
+        while (i<n && j<n) {
+            if (arrival[i]<=depart[j]) {
                 count++;
+                if (count>pf) {
+                    pf=count;
+                }
                 i++;
             } else {
                 count--;
                 j++;
-            }   
-            if (count > pf) {
-                pf = count;
             }
-        }
-        while (i < n) {
-            count++;
-            if (count > pf) {
-                pf = count;
-            }
-            i++;
         }
         System.out.print(pf);
         
