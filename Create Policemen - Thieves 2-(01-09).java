@@ -1,33 +1,33 @@
-an array of size N. Which has the following specifications: Each element in the array contains either a policeman or a thief. Each policeman can catch only one thief. A policeman cannot catch a thief who is more than K units away from him. We need to find the maximum number of thieves that can be caught.
+// an array of size N. Which has the following specifications: Each element in the array contains either a policeman or a thief. Each policeman can catch only one thief. A policeman cannot catch a thief who is more than K units away from him. We need to find the maximum number of thieves that can be caught.
 
-image
+// image
 
-Input Format
+// Input Format
 
-6
-P
-T
-P
-T
-T
-P
-3
+// 6
+// P
+// T
+// P
+// T
+// T
+// P
+// 3
 
-Output Format
+// Output Format
 
-Maximum thieves caught: 3
+// Maximum thieves caught: 3
 
-Sample Input 0
+// Sample Input 0
 
-6
-P
-T
-P
-T
-T
-P
-3
-Sample Output 0
+// 6
+// P
+// T
+// P
+// T
+// T
+// P
+// 3
+// Sample Output 0
 
 
 import java.util.Scanner;
