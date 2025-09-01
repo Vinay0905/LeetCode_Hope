@@ -1,0 +1,77 @@
+an array of size N. Which has the following specifications: Each element in the array contains either a policeman or a thief. Each policeman can catch only one thief. A policeman cannot catch a thief who is more than K units away from him. We need to find the maximum number of thieves that can be caught.
+
+image
+
+Input Format
+
+6
+P
+T
+P
+T
+T
+P
+3
+
+Output Format
+
+Maximum thieves caught: 3
+
+Sample Input 0
+
+6
+P
+T
+P
+T
+T
+P
+3
+Sample Output 0
+
+
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Read array size
+        int n = sc.nextInt();
+        char[] policethieves = new char[n];
+
+        // Read the array elements
+        for (int i = 0; i < n; i++) {
+            policethieves[i] = sc.next().charAt(0);
+        }
+
+        // Read K (maximum distance)
+        int k = sc.nextInt();
+
+        int count = 0;
+
+        // Traverse each policeman
+        for (int i = 0; i < n; i++) {
+            if (policethieves[i] == 'P') {
+                // Check all positions within K distance: [i-K, i+K]
+                for (int d = -k; d <= k; d++) {
+                    int pos = i + d;
+
+                    // Check if 'pos' is within valid bounds
+                    if (pos >= 0 && pos < n) {
+                        if (policethieves[pos] == 'T') {
+                            // Catch the thief!
+                            count++;
+                            policethieves[pos] = 'C'; // Mark as caught
+                            break; // Each policeman catches only one thief
+                        }
+                    }
+                }
+            }
+        }
+
+        System.out.println("Maximum thieves caught: " + count);
+        
+        sc.close();
+    }
+}
